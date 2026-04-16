@@ -28,8 +28,33 @@ for (let p of pages) {
     if (a.host === location.host && a.pathname === location.pathname) {
         a.classList.add('current');
     }
-    if(a.host != location.host){
+    if (a.host != location.host) {
         a.target = "_blank";
     }
     nav.append(a);
 }
+
+document.body.insertAdjacentHTML(
+    'afterbegin',
+    `
+	<label class="color-scheme">
+		Theme:
+		<select>
+			<option value="light dark">Automatic</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+		</select>
+	</label>`,
+);
+
+let select = document.querySelector(".color-scheme select");
+
+if ("colorScheme" in localStorage) {
+    document.documentElement.style.setProperty('color-scheme', localStorage.colorScheme);
+    select.value = localStorage.colorScheme;
+}
+
+select.addEventListener('input', function (event) {
+    localStorage.colorScheme = event.target.value;
+    document.documentElement.style.setProperty('color-scheme', event.target.value);
+});

@@ -31,11 +31,12 @@ nav li {
 }
 
 nav {
+	--border-color: oklch(50% 10% 200 / 40%);
 	display: flex;
 	margin-bottom: 1em;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: oklch(80% 3% 200);
+	border-bottom-color: var(--border-color);
 }
 
 
@@ -48,7 +49,7 @@ nav a{
 }
 
 .current{
-	border-bottom: 0.4em solid oklch(80% 3% 200);
+	border-bottom: 0.4em solid var(--border-color);
 	padding-bottom: 0.1em;
 	font-weight: 600;
 }
@@ -58,12 +59,8 @@ nav a:hover{
 	padding-bottom: 0.1em;
 }
 
-input {
-	font: inherit;
-}
-
-textarea {
-	font: inherit;
+input, textarea, button, select{
+	font-family: inherit;
 }
 
 form{
@@ -80,7 +77,6 @@ label{
 
 button{
 	grid-column: 1 / -1;
-	font: inherit;
 }
 
 .projects{
@@ -110,9 +106,9 @@ button{
 
 .resume-page section {
 	padding: 1rem 1.2rem;
-	border: 1px solid oklch(88% 0.02 240);
+	border: 1px solid light-dark(oklch(88% 0.02 240), oklch(35% 0.02 240));
 	border-radius: 0.8rem;
-	background: oklch(99% 0.01 240);
+	background: light-dark(oklch(99% 0.01 240), oklch(20% 0.01 240));
 }
 
 .resume-page section > h2 {
@@ -125,7 +121,7 @@ button{
 .resume-page article + article {
 	margin-top: 1rem;
 	padding-top: 1rem;
-	border-top: 1px dashed oklch(85% 0.02 240);
+	border-top: 1px dashed light-dark(oklch(85% 0.02 240), oklch(35% 0.02 240));
 }
 
 .resume-page h3 {
@@ -150,3 +146,11 @@ button{
 .resume-page time {
 	font-weight: 600;
 }
+
+.color-scheme {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	font-size: 80%;
+}
+
