@@ -58,3 +58,37 @@ select.addEventListener('input', function (event) {
     localStorage.colorScheme = event.target.value;
     document.documentElement.style.setProperty('color-scheme', event.target.value);
 });
+
+export async function fetchJSON(url) {
+    try {
+        // Fetch the JSON file from the given URL
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch projects: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching or parsing JSON data:', error);
+    }
+}
+
+export function renderProjects(project, containerElement, headingLevel = 'h2') {
+    if (!(containerElement instanceof Element)) {
+        throw new TypeError('containerElement must be a DOM Element');
+    }
+
+    containerElement.innerHTML = '';
+    for (let p of project) {
+        const article = document.createElement('article');
+        article.innerHTML = `
+            <${headingLevel}>${p.title}</${headingLevel}>
+            <img src="${p.image}" alt="${p.title}">
+            <p>${p.description}</p>`;
+        containerElement.appendChild(article);
+    }
+}
+
+export async function fetchGithubData(username) {
+    return fetchJSON(`https://api.github.com/users/${username}`);
+}
